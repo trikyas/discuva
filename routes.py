@@ -21,6 +21,9 @@ def about():
 def signup():
     form = SignupForm()
     if request.method == 'POST':
+      if form.validate() == False:
+          return render_template('signup.html', form = form)
+      else:
         return "Success Baby!"
         
     elif request.method == 'GET':
