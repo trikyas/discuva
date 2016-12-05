@@ -1,4 +1,4 @@
-#!/learning-flask/venv/bin/python
+#!/discuva/venv/bin/python
 
 import sys
 import getopt

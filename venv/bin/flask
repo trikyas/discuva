@@ -1,4 +1,4 @@
-#!/learning-flask/venv/bin/python2.7
+#!/discuva/venv/bin/python2.7
 
 # -*- coding: utf-8 -*-
 import re
