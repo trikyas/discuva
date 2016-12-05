@@ -1,5 +1,5 @@
 from flask import Flask, render_template
-from models import db
+from app.models import db
 from forms import signupForm
 
 app = Flask(__name__)
