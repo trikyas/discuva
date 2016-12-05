@@ -1,6 +1,6 @@
 from flask import Flask, render_template
 from models import db
-from wtforms import SignupForm
+from form import SignupForm
 
 app = Flask(__name__)
 
