@@ -6,6 +6,7 @@ app = Flask(__name__)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'pastgressql://localhost/discuva'
 db.init_app(app)
+
 app.secret_key = "development-key"
 
 @app.route("/")
