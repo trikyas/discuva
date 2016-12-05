@@ -57,12 +57,11 @@ a {
   width: 600px;
 }
 .btn {
-  color: #000;
+  color: #000000;
   transition: 0.5s all ease-in-out;
 }
 .btn:hover {
-  color: #fff;
-  background-color: #4285f4;
+  color: #4285f4;
 }
 .btn-primary {
   background: #4285f4;
