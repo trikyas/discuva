@@ -49,7 +49,7 @@ def login():
               return redirect(url_for('home'))
           else:
               return redirect(url_for('login'))
-          elif request.method == 'GET':
+              elif request.method == 'GET':
               return render_template("login.html", form=form)
 @app.route("/home")
 def home():
