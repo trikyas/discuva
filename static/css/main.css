@@ -56,10 +56,6 @@ a {
 .section-device img {
   width: 600px;
 }
-.btn {
-  color: #000000;
-  transition: 0.5s all ease-in-out;
-}
 .btn-primary {
   background: #4285f4;
   border: 1px solid #1266f1;
@@ -106,9 +102,6 @@ header {
   font-size: 17px;
   letter-spacing: 2.5px;
   text-transform: uppercase;
-}
-.title .btn:hover {
-  color: #4285f4;
 }
 
 .title a, .title a:visited {
