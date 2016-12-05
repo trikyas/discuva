@@ -19,7 +19,7 @@ def about():
 
 @app.route("/signup")
 def signup():
-    form = signupForm()
+    form = SignupForm()
     return render_template("signup.html", form=form)
     
 if __name__ == "__main__":
