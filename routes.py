@@ -44,13 +44,15 @@ def login():
           email = form.email.data
           password = form.password.data
           user = User.query.filter_by(email=email).first()
-          if user is not None and user.check_password(password):
-              session['email'] = form.email.data
-              return redirect(url_for('home'))
-          else:
-              return redirect(url_for('login'))
-              elif request.method == 'GET':
-              return render_template("login.html", form=form)
+        if user is not None and user.check_password(password):
+          session['email'] = form.email.data
+          return redirect(url_for('home'))
+      else:
+          return redirect(url_for('login'))
+          
+    elif request.method == 'GET':
+        return render_template("login.html", form=form)
+        
 @app.route("/home")
 def home():
     return render_template("home.html")
