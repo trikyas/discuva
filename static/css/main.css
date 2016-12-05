@@ -56,7 +56,14 @@ a {
 .section-device img {
   width: 600px;
 }
-
+.btn {
+  color: #000;
+  transition: 0.5s all ease-in-out;
+}
+.btn:hover {
+  color: #fff;
+  background-color: #4285f4;
+}
 .btn-primary {
   background: #4285f4;
   border: 1px solid #1266f1;
@@ -94,6 +101,7 @@ a {
 header {
   background-color: #fff;
   padding: 25px 0;
+  filter: drop-shadow(0 0 0.4vh #000);
 }
 
 .title {
