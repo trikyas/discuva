@@ -22,15 +22,15 @@ def signup():
     form = SignupForm()
     if request.method == 'POST':
       if form.validate() == False:
-          return render_template('signup.html', form = form)
+          return render_template('signup.html', form=form)
       else:
-        newuser = User(form.first_name.data, form.last_name.data, form.email.data, form.password.data)
-        db.session.add(newuser)
-        db.session.commit()
-        return "Success Baby!"
+          newuser = User(form.first_name.data, form.last_name.data, form.email.data, form.password.data)
+          db.session.add(newuser)
+          db.session.commit()
+          return "Success Baby!"
         
     elif request.method == 'GET':
-        return render_template("signup.html", form = form)
+        return render_template("signup.html", form=form)
     
     if __name__ == "__main__":
         app.run(debug=True)
