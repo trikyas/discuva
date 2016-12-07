@@ -2,9 +2,11 @@ from flask import Flask, render_template, request, session, redirect, url_for
 from models import db, User
 from form import SignupForm, LoginForm, AddressForm
 
+#–––– It must be in the "from" –– "imports".. I can't think of anything else... Please check
+
 app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://atcyhqeissgkmo:2BnJWWm_4SJsVK8gYCFvBJ3cLx@ec2-54-235-123-159.compute-1.amazonaws.com:5432/ddm8qo4clh00q7'
+app.config['SQLALCHEMY_DATABASE_URI'] = postgres://atcyhqeissgkmo:2BnJWWm_4SJsVK8gYCFvBJ3cLx@ec2-54-235-123-159.compute-1.amazonaws.com:5432/ddm8qo4clh00q7
 db.init_app(app)
 
 app.secret_key = "development-key"
@@ -75,21 +77,22 @@ def home():
   form = AddressForm()
 
   places = []
+  # my place ––– works
   my_coordinates = (-31.9110, 152.4539)
 
   if request.method == 'POST':
     if form.validate() == False:
       return render_template('home.html', form=form)
     else:
-      # get the address
+      # get the address ––– works
       address = form.address.data 
 
-      # query for places around it
+      # query for places around it ––– works
       p = Place()
       my_coordinates = p.address_to_latlng(address)
       places = p.query(address)
 
-      # return those results
+      # return those results  ––– It is not returning
       return render_template('home.html', form=form, my_coordinates=my_coordinates, places=places)
 
   elif request.method == 'GET':
