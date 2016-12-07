@@ -30,7 +30,6 @@ def signup():
           
           session['email'] = newuser.email
           return redirect(url_for('home'))
-          return "Success Baby!"
         
     elif request.method == 'GET':
         return render_template("signup.html", form=form)
