@@ -11,28 +11,33 @@ app.secret_key = "development-key"
 
 @app.route("/")
 def index():
-    return render_template("index.html")
-    
+  return render_template("index.html")
+
 @app.route("/about")
 def about():
-    return render_template("about.html")
+  return render_template("about.html")
 
-@app.route("/signup", methods=['GET', 'POST'])
+@app.route("/signup", methods=["GET", "POST"])
 def signup():
-    form = SignupForm()
-    if request.method == 'POST':
-      if form.validate() == False:
-          return render_template('signup.html', form=form)
-      else:
-          newuser = User(form.first_name.data, form.last_name.data, form.email.data, form.password.data)
-          db.session.add(newuser)
-          db.session.commit()
-          
-          session['email'] = newuser.email
-          return redirect(url_for('home'))
-        
-    elif request.method == 'GET':
-        return render_template("signup.html", form=form)
+  if 'email' in session:
+    return redirect(url_for('home'))
+
+  form = SignupForm()
+
+  if request.method == "POST":
+    if form.validate() == False:
+      return render_template('signup.html', form=form)
+    else:
+      newuser = User(form.first_name.data, form.last_name.data, form.email.data, form.password.data)
+      db.session.add(newuser)
+      db.session.commit()
+
+      session['email'] = newuser.email
+      return redirect(url_for('home'))
+
+  elif request.method == "GET":
+    return render_template('signup.html', form=form)
+
 @app.route("/login", methods=["GET", "POST"])
 def login():
   if 'email' in session:
@@ -59,12 +64,36 @@ def login():
 
 @app.route("/logout")
 def logout():
-    session.pop('email', None)
-    return redirect(url_for('index'))
-        
-@app.route("/home")
-def home():
-    return render_template("home.html")
+  session.pop('email', None)
+  return redirect(url_for('index'))
 
-    if __name__ == "__main__":
-        app.run(debug=True)
+@app.route("/home", methods=["GET", "POST"])
+def home():
+  if 'email' not in session:
+    return redirect(url_for('login'))
+
+  form = AddressForm()
+
+  places = []
+  my_coordinates = (-31.9110, 152.4539)
+
+  if request.method == 'POST':
+    if form.validate() == False:
+      return render_template('home.html', form=form)
+    else:
+      # get the address
+      address = form.address.data 
+
+      # query for places around it
+      p = Place()
+      my_coordinates = p.address_to_latlng(address)
+      places = p.query(address)
+
+      # return those results
+      return render_template('home.html', form=form, my_coordinates=my_coordinates, places=places)
+
+  elif request.method == 'GET':
+    return render_template("home.html", form=form, my_coordinates=my_coordinates, places=places)
+
+if __name__ == "__main__":
+  app.run(debug=True)
